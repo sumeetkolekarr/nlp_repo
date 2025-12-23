@@ -1,316 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feel Flow | BERT Sentiment Analysis</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Oswald:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <style>
-               * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            /* color: aliceblue; */
-            font-family: "Poppins", sans-serif;
-            font-weight: 300;
-            font-style: normal;
+      :root {
+        --primary-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        --accent-color: #00d4ff;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --text-main: #f0f0f0;
+      }
 
-        }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
 
-        body {
-            background: rgb(2, 0, 36);
-            background: linear-gradient(257deg, rgba(2, 0, 36, 1) 0%, rgba(49, 49, 167, 1) 70%, rgba(0, 212, 255, 1) 100%);
-            background-repeat: no-repeat;
-            overflow-x: hidden;
-            height: 200vh;
-        }
+      body {
+        background: var(--primary-gradient);
+        background-attachment: fixed;
+        color: var(--text-main);
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
 
-        .mainNav {
-            width: 100vw;
-            height: 7.5vh;
-            background-color: black;
-            display: flex;
-            align-items: center;
-        }
+      .mainNav {
+        width: 100%;
+        height: 80px;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid var(--glass-border);
+      }
 
-        nav {
-            justify-content: space-between;
-            display: flex;
-            width: 100vw;
-            margin: 0 25px 0 25px;
-            font-family: "Oswald", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 300;
-        }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+        margin: 0 auto;
+      }
 
-        .bodyMain {
-            color: aliceblue;
-            background-color: transparent;
-            text-align: center;
-            font-size: 82px;
-        }
+      .logo {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--accent-color);
+      }
 
-        .bodyMainHead {
-            color: aliceblue;
-            background-color: transparent;
-            text-align: center;
-            font-size: 37px;
-            margin-bottom: 35px;
-        }
+      .hero {
+        height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+      }
 
-        .bodyMainPara {
-            color: aliceblue;
-            background-color: transparent;
-            text-align: justify;
-            width: 80vw;
-            font-size: 17px;
-        }
+      .hero h1 {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 10px;
+        background: linear-gradient(to right, #fff, var(--accent-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
-        .bodyText {
-            display: flex;
-            height: 70vh;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        opacity: 0.8;
+        margin-bottom: 30px;
+      }
 
-        .downArrow {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 20vh;
-            font-size: 50px;
-            width: 100vw;
-        }
+      .mainAnalysis {
+        padding: 50px 20px 100px;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
 
-        .Arrow {
-            /* position: relative; */
-            animation: move 10s infinite alternate;
-        }
+      .card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(15px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 40px;
+        width: 100%;
+        max-width: 500px;
+        transition: transform 0.3s;
+      }
 
-        @keyframes move {
-            0% {
-                transform: translateY(0);
-            }
+      h3 {
+        font-family: "Oswald", sans-serif;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        color: var(--accent-color);
+      }
 
-            50% {
-                transform: translateY(75px);
-            }
+      textarea {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 15px;
+        color: white;
+        font-size: 1rem;
+        resize: none;
+        margin-bottom: 20px;
+      }
 
-            100% {
-                transform: translateY(0);
-            }
-        }
+      .analyzeBtn {
+        width: 100%;
+        padding: 15px;
+        background: var(--accent-color);
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.3s;
+      }
 
-        .mainAnalysis {
-            width: 100vw;
-            height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      .analyzeBtn:hover {
+        filter: brightness(1.2);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+      }
 
-        .analysisBlock {
-            height: 40vh;
-            width: 30vw;
-            background-color: aliceblue;
-        }
+      .result-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        border-bottom: 1px solid var(--glass-border);
+      }
 
-        h3 {
-            margin-top: 15px;
-            color: black !important;
-            margin-left: 30px;
+      #result-display {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 20px;
+        text-transform: uppercase;
+      }
 
-        }
+      #scanner-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
-        .brLeft {
-            border-left: 1px solid grey;
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-        }
+      .scan-line {
+        width: 80%;
+        height: 2px;
+        background: var(--accent-color);
+        box-shadow: 0 0 20px var(--accent-color);
+        position: absolute;
+      }
 
-        .brRight {
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-        }
+      .loading-text {
+        font-family: "Oswald", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 5px;
+        color: var(--accent-color);
+      }
 
-        textarea {
-            margin-top: 10px;
-            margin-left: 30px;
-            border: 1px solid grey;
-            color: black;
-            border-radius: 5px;
-            display: block;
-        }
+      .positive {
+        color: #00ff88;
+        text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+      }
+      .negative {
+        color: #ff4d4d;
+        text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+      }
+      .neutral {
+        color: #ffd700;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+      }
 
-        .analyzeBtn {
-            margin-top: 5px;
-            margin-left: 30px;
-            color: black;
-        }
-
-        .output p {
-            color: grey;
-        }
-
-        .output-1 {
-            display: flex;
-            margin: 10px 30px 0 30px;
-            border-bottom: 1px solid grey;
-            justify-content: space-between;
-        }
-        .output {
-            display: flex;
-            margin: 10px 30px 0 30px;
-            border-bottom: 1px solid grey;
-            justify-content: space-between;
-        }
-        
-
-        .output .PosText {
-            color: black;
-        }
-
-        .output .PosScore {
-            color: springgreen;
-        }
-
-        .output .negScore {
-            color: red;
-        }
-        .maxFoot{
-            height: 20vh;
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .footer p{
-            text-align: center;
-        }
-        ul{
-            text-align: left;
-            margin-left: 250px;
-        }
-        .modelOptions{
-            margin-top: 20px;
-            margin-left: 30px;
-        }
+      footer {
+        padding: 50px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.4);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div id="scanner-overlay">
+      <div class="scan-line"></div>
+      <div class="loading-text">DEEP BERT ANALYSIS...</div>
+    </div>
+
     <div class="mainNav">
-        <nav>
-            <p>Feel Flow</p>
-            <button type="button">Try Out</button>
-        </nav>
-    </div>
-    <div class="bodyText">
-        <div class="bodyMain">
-            Free Flow
-        </div>
-        <div class="bodyMainHead">
-            Navigating the Emotional Currents of Social Media
-        </div>
-        <div class="bodyMainPara">
-            Welcome to Feel Flow - Where Emotions Meet Analysis! Dive into the Pulse of the Internet: Feel Flow, your
-            go-to
-            sentiment analysis tool, brings you the best of both worlds: BERT and Logistic Regression techniques. Unlock
-            the
-            Power of Emotions: From tweets to Instagram gems and Facebook captions, Feel Flow delves deep into social
-            media's emotional landscape.
-        </div>
-    </div>
-    <div class="downArrow">
-        <img src="../static/icons8-down-arrow-64.png" class="Arrow" alt="Down Arrow">
-    </div>
-    <div class="mainAnalysis">
-        <div class="analysisBlock brRight">
-            <!-- <form id="sentiment-form">
-                <textarea id="text-input" placeholder="Enter text..."></textarea>
-                <select id="model-select">
-                    <option value="distilbert">DistilBERT</option>
-                    <option value="tfidf_lr">TF-IDF + Logistic Regression</option>
-                     Add an option for the new model
-                </select>
-                <button type="submit">Analyze</button>
-            </form> -->
-            <!-- <div id="result"></div> -->
-            <h3>Test with your own Text</h3>
-            <form id="sentiment-form"> <!-- Add the ID to your form -->
-                <textarea name="Enter your Text..." id="text-input" cols="46" rows="8"></textarea>
-                <select class="modelOptions" id="model-select">
-                    <option value="distilbert">BERT</option>
-                    <option value="tfidf_lr">Logistic Regression</option>
-                    <!-- Add an option for the new model -->
-                </select>
-                <button class="analyzeBtn" type="submit">Classify Text</button> <!-- Typo fixed in button text -->
-            </form>
-        </div>
-        
-        <div class="analysisBlock brLeft">
-            <h3>Results</h3>
-            <div class="output-1">
-                <p>Sentiment</p>
-                <p>Score</p>
-            </div>
-            
-            <div id="result">
-                
-                    <p class="PosText"></p>
-                    <p class="PosScore"></p>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-    <div class="maxFoot">
-        <div class="footer">
-            <p>Choose Your Mood Detector:
-            </p>
-            <ul>
-                <li>BERT: Dive deep with cutting-edge AI.</li>
-                <li>Logistic Regression: Classic vibes for traditionalists.</li>
-            </ul>
-            <p style="margin-left: 110px;">Just Type, Click 'Analyze,' and Feel the Flow!</p>
-        </div>
+      <nav>
+        <div class="logo">Feel Flow</div>
+      </nav>
     </div>
 
-    <!-- Your JavaScript code here -->
+    <section class="hero">
+      <h1>FEEL FLOW</h1>
+      <p>
+        Powered by DistilBERT. Deep learning analysis for high-precision
+        sentiment detection.
+      </p>
+    </section>
+
+    <div class="mainAnalysis">
+      <div class="card">
+        <h3>Input Analysis</h3>
+        <form id="sentiment-form">
+          <textarea
+            id="text-input"
+            placeholder="Type or paste text here to analyze Sentiment..."
+            rows="6"
+            required
+          ></textarea>
+          <button class="analyzeBtn" type="submit">Classify Sentiment</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>AI Result</h3>
+        <div id="result-content">
+          <p style="text-align: center; opacity: 0.5; padding: 20px">
+            Enter text and click classify to see the deep learning results.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Feel Flow AI | DistilBERT Engine</p>
+    </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('sentiment-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                var text = document.getElementById('text-input').value;
-                var selectedModel = document.getElementById('model-select').value;
-                fetch('/analyze', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'text=' + encodeURIComponent(text) + '&model=' + encodeURIComponent(selectedModel),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('result').innerHTML = `
-                    <div class="output">
-                        <p class="PosText"> ${data.sentiment}</p>
-                        <p class="PosScore"> ${data.score}</p>
-                    </div>
-                    `;
-                });
-            });
-        });
+      document.addEventListener("DOMContentLoaded", function () {
+        const tl = gsap.timeline();
+        tl.from("h1", { y: 50, opacity: 0, duration: 1 })
+          .from(".hero p", { y: 20, opacity: 0, duration: 0.5 }, "-=0.5")
+          .from(".card", {
+            scale: 0.9,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 0.8,
+          });
+
+        document
+          .getElementById("sentiment-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            const text = document.getElementById("text-input").value;
+
+            showScanner();
+
+            fetch("/analyze", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: "text=" + encodeURIComponent(text),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                setTimeout(() => {
+                  hideScanner(() => displayResult(data));
+                }, 1200);
+              })
+              .catch(() => hideScanner());
+          });
+
+        function showScanner() {
+          const scanner = document.getElementById("scanner-overlay");
+          scanner.style.display = "flex";
+          gsap.fromTo(
+            ".scan-line",
+            { top: "0%" },
+            { top: "100%", duration: 1.5, repeat: -1, ease: "none" }
+          );
+        }
+
+        function hideScanner(callback) {
+          gsap.to("#scanner-overlay", {
+            opacity: 0,
+            duration: 0.4,
+            onComplete: () => {
+              const scanner = document.getElementById("scanner-overlay");
+              scanner.style.display = "none";
+              scanner.style.opacity = "1";
+              if (callback) callback();
+            },
+          });
+        }
+
+        function displayResult(data) {
+          const resBox = document.getElementById("result-content");
+          const sentiment = data.sentiment.toLowerCase();
+
+          let colorClass = "neutral";
+          if (sentiment === "positive") colorClass = "positive";
+          if (sentiment === "negative") colorClass = "negative";
+
+          resBox.innerHTML = `
+            <div id="result-display" class="${colorClass}">${
+            data.sentiment
+          }</div>
+            <div class="result-item">
+                <span>Model Confidence</span>
+                <span class="${colorClass}">${(data.score * 100).toFixed(
+            2
+          )}%</span>
+            </div>
+          `;
+
+          gsap.from("#result-content", {
+            scale: 0.8,
+            opacity: 0,
+            duration: 0.5,
+          });
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
