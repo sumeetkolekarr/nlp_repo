@@ -1,0 +1,208 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+:root{
+
+    --primary :whitesmoke;
+    --secondary: white ;
+    --text: black ;
+}
+.box h1 {
+    font-size: 3.5rem;
+    color: black;
+}
+
+main{
+    padding-top: 50px;
+    width: 100vw;
+    height: auto;
+    display: flex ; 
+    background-color: var(--primary);
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.box {
+    background-color: var(--secondary);
+    padding: 20px;
+    width: 40vw;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    /* border: 2px solid black; */
+     /* justify-content: center; */
+    align-items: center;
+}
+.box .form-div {
+    height: 300px;
+    display: flex;
+    flex-direction: column !important;
+    gap: 40px;
+    margin: 30px;
+    padding: 40px;
+}
+.result h1{
+    font-size: 3rem;
+}
+.form textarea{
+    display: flex;
+    justify-items: start;
+    align-items: start;
+    overflow: auto;
+    width: 300px;
+    height: 200px;
+    padding: 10px;
+    margin: 20px 0;
+    font-size: 1.1rem;
+    text-align: left !important;
+    border: 1px solid #e7eaee;
+    /* outline: #41a1f0; */
+    /* border: 3px solid red; */
+    border-radius: 14px;
+}
+.form .select {
+    padding: 10px;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 8px;
+}
+.button {
+    display: block;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    background-color: #008bff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+}
+/* .button:hover{
+    background-color: #41a1f0;
+} */
+.button:active{
+    background-color:#41a1f0;
+    color: white;
+}
+
+.result {
+    background-color: var(--secondary);
+    padding: 20px;
+    width: 40vw;
+    height: 600px;
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    border-radius: 10px ;
+    /* border: 2px solid black;
+     */
+}
+.result-1 {
+    padding: 30px;
+    gap: 40px;
+    justify-content: center;
+    /* align-items: center; */
+    display: flex;
+    flex-direction: column;
+}
+.result-2 {
+    padding: 30px;
+    gap: 40px;
+    justify-content: center;
+    /* align-items: center; */
+    display: flex;
+    flex-direction: column;
+}
+/* Style for sentiment label */
+.sentiment-label, .label {
+    font-style: bold;
+    font-size: 3rem;
+    color: var(--text);
+    cursor: pointer;
+    /* background-color: whitesmoke; */
+    padding: 4px 10px;
+    border-radius: 10px;
+
+    /* Add any other styles you want to apply */
+}
+
+/* Style for score */
+.score {
+    font-style: bold;
+    font-size: 1.4rem;
+    color: var(--text);
+    cursor: pointer;
+    /* background-color: whitesmoke; */
+    padding: 4px 10px;
+    border-radius: 10px;
+
+    /* border: 2px solid grey; */
+    /* Add any other styles you want to apply */
+}
+
+/* .brack {
+    border: 2px solid grey;
+} */
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.nav h1 {
+    font-size: 3.5rem;
+}
+.nav p {
+    font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .nav h1 {
+        padding: 10px;
+        font-size: 3rem;
+    }
+    .nav p {
+        text-align: center;
+        font-size: 2rem;
+    }
+    main{flex-direction: column;
+    }
+    .box {
+        width: 80%;
+        height: auto;
+        margin: 30px;
+        /* padding: 0; */
+    }
+    .box h1 {
+        font-size: 2.3rem;
+    }
+    .form textarea{
+        width: 260px;
+    }
+    .result {
+        width: 80%;
+        height: auto;
+    }
+    .result-1{
+        font-weight: 1.7rem;
+        padding: 0;
+    }
+    .result-2{
+        font-weight: 1.7rem;
+        padding: 0;
+    }
+    .score{
+        padding: 0;
+        font-size: 1.4rem;
+    }
+    .sentiment-label{
+        font-size: 1.7rem;
+    }
+    .label {
+        font-size: 1.7rem;
+        padding: 0;
+    }
+  }

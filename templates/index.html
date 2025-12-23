@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+               * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* color: aliceblue; */
+            font-family: "Poppins", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+
+        }
+
+        body {
+            background: rgb(2, 0, 36);
+            background: linear-gradient(257deg, rgba(2, 0, 36, 1) 0%, rgba(49, 49, 167, 1) 70%, rgba(0, 212, 255, 1) 100%);
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+            height: 200vh;
+        }
+
+        .mainNav {
+            width: 100vw;
+            height: 7.5vh;
+            background-color: black;
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            justify-content: space-between;
+            display: flex;
+            width: 100vw;
+            margin: 0 25px 0 25px;
+            font-family: "Oswald", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+        }
+
+        .bodyMain {
+            color: aliceblue;
+            background-color: transparent;
+            text-align: center;
+            font-size: 82px;
+        }
+
+        .bodyMainHead {
+            color: aliceblue;
+            background-color: transparent;
+            text-align: center;
+            font-size: 37px;
+            margin-bottom: 35px;
+        }
+
+        .bodyMainPara {
+            color: aliceblue;
+            background-color: transparent;
+            text-align: justify;
+            width: 80vw;
+            font-size: 17px;
+        }
+
+        .bodyText {
+            display: flex;
+            height: 70vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .downArrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20vh;
+            font-size: 50px;
+            width: 100vw;
+        }
+
+        .Arrow {
+            /* position: relative; */
+            animation: move 10s infinite alternate;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(75px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .mainAnalysis {
+            width: 100vw;
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .analysisBlock {
+            height: 40vh;
+            width: 30vw;
+            background-color: aliceblue;
+        }
+
+        h3 {
+            margin-top: 15px;
+            color: black !important;
+            margin-left: 30px;
+
+        }
+
+        .brLeft {
+            border-left: 1px solid grey;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .brRight {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        textarea {
+            margin-top: 10px;
+            margin-left: 30px;
+            border: 1px solid grey;
+            color: black;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .analyzeBtn {
+            margin-top: 5px;
+            margin-left: 30px;
+            color: black;
+        }
+
+        .output p {
+            color: grey;
+        }
+
+        .output-1 {
+            display: flex;
+            margin: 10px 30px 0 30px;
+            border-bottom: 1px solid grey;
+            justify-content: space-between;
+        }
+        .output {
+            display: flex;
+            margin: 10px 30px 0 30px;
+            border-bottom: 1px solid grey;
+            justify-content: space-between;
+        }
+        
+
+        .output .PosText {
+            color: black;
+        }
+
+        .output .PosScore {
+            color: springgreen;
+        }
+
+        .output .negScore {
+            color: red;
+        }
+        .maxFoot{
+            height: 20vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer p{
+            text-align: center;
+        }
+        ul{
+            text-align: left;
+            margin-left: 250px;
+        }
+        .modelOptions{
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainNav">
+        <nav>
+            <p>Feel Flow</p>
+            <button type="button">Try Out</button>
+        </nav>
+    </div>
+    <div class="bodyText">
+        <div class="bodyMain">
+            Free Flow
+        </div>
+        <div class="bodyMainHead">
+            Navigating the Emotional Currents of Social Media
+        </div>
+        <div class="bodyMainPara">
+            Welcome to Feel Flow - Where Emotions Meet Analysis! Dive into the Pulse of the Internet: Feel Flow, your
+            go-to
+            sentiment analysis tool, brings you the best of both worlds: BERT and Logistic Regression techniques. Unlock
+            the
+            Power of Emotions: From tweets to Instagram gems and Facebook captions, Feel Flow delves deep into social
+            media's emotional landscape.
+        </div>
+    </div>
+    <div class="downArrow">
+        <img src="../static/icons8-down-arrow-64.png" class="Arrow" alt="Down Arrow">
+    </div>
+    <div class="mainAnalysis">
+        <div class="analysisBlock brRight">
+            <!-- <form id="sentiment-form">
+                <textarea id="text-input" placeholder="Enter text..."></textarea>
+                <select id="model-select">
+                    <option value="distilbert">DistilBERT</option>
+                    <option value="tfidf_lr">TF-IDF + Logistic Regression</option>
+                     Add an option for the new model
+                </select>
+                <button type="submit">Analyze</button>
+            </form> -->
+            <!-- <div id="result"></div> -->
+            <h3>Test with your own Text</h3>
+            <form id="sentiment-form"> <!-- Add the ID to your form -->
+                <textarea name="Enter your Text..." id="text-input" cols="46" rows="8"></textarea>
+                <select class="modelOptions" id="model-select">
+                    <option value="distilbert">BERT</option>
+                    <option value="tfidf_lr">Logistic Regression</option>
+                    <!-- Add an option for the new model -->
+                </select>
+                <button class="analyzeBtn" type="submit">Classify Text</button> <!-- Typo fixed in button text -->
+            </form>
+        </div>
+        
+        <div class="analysisBlock brLeft">
+            <h3>Results</h3>
+            <div class="output-1">
+                <p>Sentiment</p>
+                <p>Score</p>
+            </div>
+            
+            <div id="result">
+                
+                    <p class="PosText"></p>
+                    <p class="PosScore"></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="maxFoot">
+        <div class="footer">
+            <p>Choose Your Mood Detector:
+            </p>
+            <ul>
+                <li>BERT: Dive deep with cutting-edge AI.</li>
+                <li>Logistic Regression: Classic vibes for traditionalists.</li>
+            </ul>
+            <p style="margin-left: 110px;">Just Type, Click 'Analyze,' and Feel the Flow!</p>
+        </div>
+    </div>
+
+    <!-- Your JavaScript code here -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('sentiment-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                var text = document.getElementById('text-input').value;
+                var selectedModel = document.getElementById('model-select').value;
+                fetch('/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'text=' + encodeURIComponent(text) + '&model=' + encodeURIComponent(selectedModel),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').innerHTML = `
+                    <div class="output">
+                        <p class="PosText"> ${data.sentiment}</p>
+                        <p class="PosScore"> ${data.score}</p>
+                    </div>
+                    `;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
